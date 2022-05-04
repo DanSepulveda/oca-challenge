@@ -6,19 +6,26 @@ import Button from './Button'
 import { toast } from 'react-hot-toast'
 import { BsGithub } from 'react-icons/bs'
 
-const SearchBox = ({ setUsers, setNoResults, setLoading }) => {
+const SearchBox = ({ setUsers, setNoResults, setLoading, setPage }) => {
 
     const search_users = async (search) => {
         // Reset variable if user has made a previous search
         setNoResults(false)
+
+        // Reset page when searching again
+        setPage(1)
 
         // Display loading message
         setLoading(true)
 
         try {
             const users = await axios.get(`https://api.github.com/search/users?q=${search}`)
-            if (users.data.items.length) setUsers(users.data.items)
-            else setNoResults(true)
+            if (users.data.items.length) {
+                setUsers(users.data.items)
+            } else {
+                setNoResults(true)
+                setUsers([])
+            }
         } catch {
             toast.error('Something went wrong. Try again later.')
         }

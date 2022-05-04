@@ -10,19 +10,15 @@ const App = () => {
   const [users, setUsers] = useState([])
   const [noResults, setNoResults] = useState(false)
   const [loading, setLoading] = useState(false)
-
-  // Conditional component rendering
-  const users_cards = users.length && <Users users={users} />
-  const message_after_search = noResults && <NoResults />
-  const loader_while_fetch = loading && <Loader />
+  const [page, setPage] = useState(1)
 
   return (
     <main>
       <div><Toaster /></div>
-      <SearchBox setUsers={setUsers} setNoResults={setNoResults} setLoading={setLoading} />
-      {users_cards}
-      {message_after_search}
-      {loader_while_fetch}
+      <SearchBox setUsers={setUsers} setNoResults={setNoResults} setLoading={setLoading} setPage={setPage} />
+      {users.length && <Users users={users} page={page} setPage={setPage} />}
+      {noResults && <NoResults />}
+      {loading && <Loader />}
     </main>
   )
 }
