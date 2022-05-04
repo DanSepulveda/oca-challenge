@@ -6,7 +6,7 @@ import Button from './Button'
 import { toast } from 'react-hot-toast'
 import { BsGithub } from 'react-icons/bs'
 
-const SearchBox = ({ setUsers, setNoResults, setLoading, setPage }) => {
+const SearchBox = ({ setUsers, setNoResults, setLoading, setPage, setFirstSearch }) => {
 
     const search_users = async (search) => {
         // Reset variable if user has made a previous search
@@ -17,6 +17,9 @@ const SearchBox = ({ setUsers, setNoResults, setLoading, setPage }) => {
 
         // Display loading message
         setLoading(true)
+
+        // Changes state variable to change displayed message
+        setFirstSearch(false)
 
         try {
             const users = await axios.get(`https://api.github.com/search/users?q=${search}`)

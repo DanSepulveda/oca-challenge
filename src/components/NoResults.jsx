@@ -1,8 +1,6 @@
-import React from 'react'
-
 const NoResults = () => {
     return (
-        <div>NoResults</div>
+        <h1 className='text-center mt-5'>No user found</h1>
     )
 }
 

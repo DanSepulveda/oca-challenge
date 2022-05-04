@@ -1,10 +1,6 @@
-import React from 'react'
-
 const Loader = () => {
     return (
-        <div>
-            <p>hola</p>
-        </div>
+        <h1 className='text-center mt-5'>Searching for user...</h1>
     )
 }
 
