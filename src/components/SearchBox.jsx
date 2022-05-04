@@ -5,17 +5,19 @@ import Input from './Input'
 import Button from './Button'
 import { toast } from 'react-hot-toast'
 
-const SearchBox = ({ setUsers, setNoResults }) => {
+const SearchBox = ({ setUsers, setNoResults, setLoading }) => {
 
     const search_users = async (search) => {
+        setNoResults(false)
+        setLoading(true)
         try {
             const users = await axios.get(`https://api.github.com/search/users?q=${search}`)
-
-            if (users.data.items.length) setUsers(users.data)
+            if (users.data.items.length) setUsers(users.data.items)
             else setNoResults(true)
         } catch {
             toast.error('Something went wrong. Try again later.')
         }
+        setLoading(false)
     }
 
     return (
